@@ -1,5 +1,4 @@
 <script lang='ts'>
-  import { ChevronRight } from "@lucide/svelte";
   import Button from "../jsrepo/button/button.svelte";
 
   import { fly } from "svelte/transition";
@@ -8,10 +7,10 @@
   import { scrollY } from "svelte/reactivity/window";
 
   let menuItems = [
-    { name: "Features", href: "#a" },
-    { name: "Solution", href: "#a" },
-    { name: "Pricing", href: "#a" },
-    { name: "About", href: "#a" },
+    { name: "Features", href: "/" },
+    { name: "Solution", href: "/" },
+    { name: "Pricing", href: "/" },
+    { name: "About", href: "/" },
   ];
   let menuState = $state(false);
   let isScrolled = $derived.by(() => {
@@ -23,12 +22,12 @@
 </script>
 
 <header>
-    <nav class="fixed z-20 w-full px-2" transition:fly={{ y: "-100%", duration: 300 }}>
+    <nav class="fixed z-[999] w-full px-2" transition:fly={{ y: "-100%", duration: 300 }}>
       <div
         class={[
-          "mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12 rounded-2xl border-border",
+          "mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12 rounded-radius border border-transparent",
           isScrolled &&
-            "bg-background-1 max-w-4xl rounded-2xl border border-border backdrop-blur-lg lg:px-5",
+            "bg-accent border border-border backdrop-blur-lg lg:px-5",
         ]}
       >
         <div

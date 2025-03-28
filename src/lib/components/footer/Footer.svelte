@@ -3,34 +3,34 @@
     const links = [
       {
         title: "Features",
-        href: "#",
+        href: "/",
       },
       {
         title: "Solution",
-        href: "#",
+        href: "/",
       },
       {
         title: "Customers",
-        href: "#",
+        href: "/",
       },
       {
         title: "Pricing",
-        href: "#",
+        href: "/",
       },
       {
         title: "Help",
-        href: "#",
+        href: "/",
       },
       {
         title: "About",
-        href: "#",
+        href: "/",
       },
     ];
   </script>
   
-  <footer class="py-16 md:py-32">
-    <div class="mx-auto max-w-5xl px-6">
-      <a href="/" aria-label="go home" class="mx-auto block size-fit group">
+  <footer class="py-16 md:py-32 z-30 relative">
+    <div class="mx-auto max-w-5xl px-6 ">
+      <a href="/" aria-label="go home" class="mx-auto block size-fit group ">
         <img src="/Logo.png" alt="ffmpregger Logo" class="size-12 group-hover:scale-105 transition-transform duration-150"/>
       </a>
   
@@ -46,7 +46,7 @@
       </div>
       <div class="my-8 flex flex-wrap justify-center gap-6 text-sm">
         <a
-          href="#"
+          href="/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="X/Twitter"
@@ -66,7 +66,7 @@
           </svg>
         </a>
         <a
-          href="#"
+          href="/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="aedIn"
@@ -86,7 +86,7 @@
           </svg>
         </a>
         <a
-          href="#"
+          href="/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Facebook"
@@ -106,7 +106,7 @@
           </svg>
         </a>
         <a
-          href="#"
+          href="/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Threads"
@@ -131,7 +131,7 @@
           </svg>
         </a>
         <a
-          href="#"
+          href="/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Instagram"
@@ -151,7 +151,7 @@
           </svg>
         </a>
         <a
-          href="#"
+          href="/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="TikTok"

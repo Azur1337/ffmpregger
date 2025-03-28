@@ -1,6 +1,5 @@
 <script>
     import Button from "$lib/components/ui/button/button.svelte";
-    import FlickeringGrid from "../flickeringGrid/FlickeringGrid.svelte";
     import { Check } from "@lucide/svelte";
     import BorderBeam from "../borderbeam/BorderBeam.svelte";
   
@@ -15,16 +14,6 @@
   
   <div class="relative py-16 md:py-32">
     <div class="mx-auto max-w-5xl px-6">
-      <!-- Flickering Grid -->
-      <FlickeringGrid
-        class="z-0 absolute inset-0 w-full"
-        squareSize={2}
-        gridGap={8}
-        color="#E0DEF4"
-        maxOpacity={0.1}
-        flickerChance={0.05}
-      />
-      <div class="z-0 absolute inset-0 bg-gradient-to-b from-background-1 via-transparent to-background-1 pointer-events-none"></div>
   
       <div class="mx-auto max-w-2xl text-center relative z-10">
         <h2 class="text-balance text-3xl font-bold md:text-4xl lg:text-5xl">

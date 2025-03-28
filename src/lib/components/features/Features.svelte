@@ -151,7 +151,7 @@
           firstImageClass="object-fit object-center"
           secondImageClass="object-fit object-center"
           class="border border-border aspect-15/8 relative hidden rounded-radius dark:block w-full h-full"
-          slideMode="hover"
+          slideMode="drag"
         />
       {:else if data[currentIndex]?.video}
         <video
