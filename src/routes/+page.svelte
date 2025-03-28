@@ -11,7 +11,7 @@
   {
     id: 1,
     title: "Compress Videos",
-    content: "Reduce video file size without losing quality using FFMpreg.",
+    content: "Reduce video file size without losing quality using FFmpreg.",
     beforeImage: "/femboy1.jpg",
     afterImage: "/femboy1.jpg",
     beforeSize: "50 MB",

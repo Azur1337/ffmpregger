@@ -31,7 +31,7 @@
   <footer class="py-16 md:py-32 z-30 relative">
     <div class="mx-auto max-w-5xl px-6 ">
       <a href="/" aria-label="go home" class="mx-auto block size-fit group ">
-        <img src="/Logo.png" alt="ffmpregger Logo" class="size-12 group-hover:scale-105 transition-transform duration-150"/>
+        <img src="/Logo.png" alt="FFmpregger Logo" class="size-12 group-hover:scale-105 transition-transform duration-150"/>
       </a>
   
       <div class="my-8 flex flex-wrap justify-center gap-6 text-sm">
@@ -172,7 +172,7 @@
         </a>
       </div>
       <span class="text-muted-foreground block text-center text-sm">
-        © {new Date().getFullYear()} <span class="text-primary font-bold underline">ffmpregger</span>, All rights reserved</span
+        © {new Date().getFullYear()} <span class="text-primary font-bold underline">FFmpregger</span>, All rights reserved</span
       >
     </div>
   </footer>
