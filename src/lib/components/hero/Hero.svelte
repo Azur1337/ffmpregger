@@ -11,6 +11,9 @@
   let fileName = $state("");
   let errorMessage = $state("");
 
+  let testValue:any = $state();
+
+  //option variables
   let ffmpegOptions = $state({
     filePath: "",
     outputName: "",
@@ -19,6 +22,106 @@
     mediaType: "",
     bitrate: 0,
   });
+
+  //ffmpreg command building
+  let ffmpegCommand = $derived.by(() => {
+  const _filePath = ffmpegOptions.filePath || "input_file";
+  const _outputName = ffmpegOptions.outputName || "output";
+  const _mediaType = ffmpegOptions.mediaType || "mp4";
+
+  // Construct the FFmpeg command with conditional inclusions
+  return `ffmpeg -i ${_filePath} ${
+    ffmpegOptions.resolution ? `-vf scale=${ffmpegOptions.resolution}` : ""
+  } ${
+    ffmpegOptions.encoder ? `-c:v ${ffmpegOptions.encoder}` : ""
+  } ${
+    ffmpegOptions.bitrate ? `-b:v ${ffmpegOptions.bitrate}k` : ""
+  } ${_outputName}.${_mediaType}`
+    .replace(/\s+/g, " ") // Replace multiple spaces with a single space
+    .trim(); // Remove leading/trailing spaces
+});
+
+  //actual option inputs, key must be ffmpegOptions variable name
+  const options = [
+    {
+      variant: "file",
+      name: "File Path",
+      key: "filePath",
+      Icon: FolderOpen,
+      tabs: [
+        { name: "Field1", values: [] },
+        { name: "Field2", values: [] },
+      ],
+    },
+    {
+      variant: "text",
+      name: "Output Name",
+      key: "outputName",
+      Icon: FileOutput,
+      tabs: [
+        { name: "Low", values: [] },
+        { name: "High", values: [] },
+      ],
+    },
+    {
+      variant: "single",
+      name: "Encoder",
+      key: "encoder",
+      Icon: Cog,
+      tabs: [
+        {
+          name: "Software",
+          values: ["H.264", "H.265", "VP9", "AV1"],
+        },
+        {
+          name: "Hardware",
+          values: ["H.264", "H.265", "VP9", "AV1"],
+        },
+      ],
+    },
+    {
+      variant: "multiple",
+      name: "Resolution",
+      key: "resolution",
+      Icon: Maximize2,
+      tabs: [
+        {
+          name: "Standard",
+          values: ["1920x1080", "1280x720", "640x480"],
+        },
+        {
+          name: "Custom",
+          values: ["3840x2160", "2560x1440"],
+        },
+      ],
+    },
+    {
+      variant: "single",
+      name: "Media Type",
+      key: "mediaType",
+      Icon: Video,
+      tabs: [
+        {
+          name: "Video",
+          values: ["MP4", "MKV", "AVI"],
+        },
+        {
+          name: "Audio",
+          values: ["MP3", "WAV", "FLAC"],
+        },
+      ],
+    },
+    {
+      variant: "slider",
+      name: "Bitrate Range",
+      key: "bitrate",
+      Icon: AudioLines,
+      tabs: [
+        { name: "Low", values: [] },
+        { name: "High", values: [] },
+      ],
+    },
+  ];
 
   const handleFileUpload = (event: Event) => {
     const input = event.target as HTMLInputElement;
@@ -38,96 +141,7 @@
     }, 2000);
   };
 
-  let ffmpegCommand = $derived.by(() => {
-    const inputPath = ffmpegOptions.filePath || "input_file";
-    const outputPath = ffmpegOptions.outputName || "output";
-    const format = ffmpegOptions.mediaType || "mp4";
-    const resolution = ffmpegOptions.resolution ? `-vf scale=${ffmpegOptions.resolution}` : "";
-    const encoder = ffmpegOptions.encoder ? `-c:v ${ffmpegOptions.encoder}` : "";
-    const bitrate = ffmpegOptions.bitrate ? `-b:v ${ffmpegOptions.bitrate}k` : "";
-    return `ffmpeg -i ${inputPath} ${resolution} ${encoder} ${bitrate} ${outputPath}.${format}`;
-  });
-
-  const optionSelectors = [
-    {
-      type: "file",
-      title: "File Path",
-      IconComponent: FolderOpen,
-      tabs: [
-        { name: "Field1", values: [] },
-        { name: "Field2", values: [] },
-      ],
-    },
-    {
-      type: "text",
-      title: "Output Name",
-      IconComponent: FileOutput,
-      tabs: [
-        { name: "Low", values: [] },
-        { name: "High", values: [] },
-      ],
-    },
-    {
-      type: "single",
-      title: "Encoder",
-      IconComponent: Cog,
-      tabs: [
-        {
-          name: "Software",
-          values: ["H.264", "H.265", "VP9", "AV1"],
-        },
-        {
-          name: "Hardware",
-          values: ["H.264", "H.265", "VP9", "AV1"],
-        },
-      ],
-    },
-    {
-      type: "multiple",
-      title: "Resolution",
-      IconComponent: Maximize2,
-      tabs: [
-        {
-          name: "Standard",
-          values: ["1920x1080", "1280x720", "640x480"],
-        },
-        {
-          name: "Custom",
-          values: ["3840x2160", "2560x1440"],
-        },
-      ],
-    },
-    {
-      type: "single",
-      title: "Media Type",
-      IconComponent: Video,
-      tabs: [
-        {
-          name: "Video",
-          values: ["MP4", "MKV", "AVI"],
-        },
-        {
-          name: "Audio",
-          values: ["MP3", "WAV", "FLAC"],
-        },
-      ],
-    },
-    {
-      type: "slider",
-      title: "Bitrate Range",
-      IconComponent: AudioLines,
-      tabs: [
-        { name: "Low", values: [] },
-        { name: "High", values: [] },
-      ],
-    },
-  ];
-
   let selectedValues = $state<Record<string, string>>({});
-
-  $effect(()=> {
-    console.log(ffmpegOptions.bitrate);
-  })
 
   $effect(() => {
     for (const [key, value] of Object.entries(selectedValues)) {
@@ -237,16 +251,13 @@
               </div>
             {/if}
           </div>
-          {#each optionSelectors as selector}
+          {#each options as option}
             <OptionSelector
-              type={selector.type || "single"}
-              title={selector.title}
-              IconComponent={selector.IconComponent}
-              tabs={selector.tabs}
-              bind:selectedValue={selectedValues[selector.title]}
-              on:valueChange={(e) => {
-                selectedValues[selector.title] = e.detail;
-              }}
+              variant={option.variant}
+              name={option.name}
+              Icon={option.Icon}
+              tabs={option.tabs}
+              bind:value={ffmpegOptions[option.key]}
             />
           {/each}
         </div>
