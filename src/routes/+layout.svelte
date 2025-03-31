@@ -3,8 +3,6 @@
 	import Navbar from "@/components/navbar/Navbar.svelte";
 	import Footer from '@/components/footer/Footer.svelte';
     import FlickeringGrid from "@/components/flickeringGrid/FlickeringGrid.svelte";
-
-
 	let { children } = $props();
 </script>
 <Navbar/>
