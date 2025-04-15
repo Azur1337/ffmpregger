@@ -327,7 +327,7 @@
 				</div>
 			{:else}
 				<div
-					class="ring-ring bg-card rounded-radius border-border shadow-shadow relative mx-auto mt-12 flex h-[15rem] max-w-2xl cursor-pointer flex-col items-center justify-center border p-4 shadow-lg ring-1 transition-transform duration-500 ease-in-out"
+					class="ring-ring bg-card hover:ring-transparent hover:border-transparent hover:shadow-none hover:bg-primary/10 rounded-radius border-border shadow-shadow relative mx-auto mt-12 flex h-[15rem] max-w-2xl cursor-pointer flex-col items-center justify-center border p-4 shadow-lg ring-1 transition-all duration-150 ease-in-out"
 					in:scale={{ duration: 500, easing: cubicOut }}
 					out:slide={{ duration: 500, easing: cubicOut }}
 				>

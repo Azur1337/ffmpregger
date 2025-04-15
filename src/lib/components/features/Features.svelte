@@ -76,13 +76,13 @@
 </script>
 
 <section id="features">
-  <div class="container">
+  <div class="flex items-center justify-center">
     <div class="mx-auto mt-48 max-w-6xl">
       <!-- Items Row -->
       <div class="flex flex-col lg:flex-row justify-center items-center gap-10">
         <ul
           bind:this={carouselRef}
-          class="flex h-full snap-x snap-mandatory flex-nowrap overflow-x-auto py-10 [-ms-overflow-style:none] [-webkit-mask-image:linear-gradient(90deg,transparent,black_20%,white_80%,transparent)] [mask-image:linear-gradient(90deg,transparent,black_20%,white_80%,transparent)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          class="flex h-full snap-x snap-mandatory flex-nowrap overflow-x-auto py-10 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {#each data as item, index}
             <!-- Card Wrapper -->
@@ -141,7 +141,7 @@
       </div>
 
       <!-- Image/Video Section -->
-      <div class="mt-0 flex justify-center relative mx-auto max-w-5xl">
+      <div class="mt-0 flex justify-center relative mx-auto max-w-6xl">
         {#if data[currentIndex]?.beforeImage && data[currentIndex]?.afterImage}
         <Compare
           firstImage={data[currentIndex].beforeImage}
