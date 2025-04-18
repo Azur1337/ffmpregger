@@ -49,13 +49,6 @@
           <div class="space-y-0.5">
             <div class="flex items-center justify-between">
               <Label for="pwd" class="text-sm">Password</Label>
-              <Button
-                variant="link"
-                size="sm"
-                class="text-sm"
-              >
-                Forgot your Password ?
-              </Button>
             </div>
             <Input
               type="password"
@@ -71,7 +64,7 @@
       <div class="p-3">
         <p class="text-foreground-2 text-center text-sm">
           Have an account ?
-          <Button variant="link" class="px-2">Sign In</Button>
+          <Button href="/auth/login" variant="link" class="px-2">Sign In</Button>
         </p>
       </div>
     </form>

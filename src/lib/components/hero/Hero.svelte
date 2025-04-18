@@ -281,19 +281,38 @@
 									<LoaderCircle class="text-primary size-12 animate-spin" />
 									<p class="text-muted-foreground text-center">Uploading..</p>
 								</div>
-							{:else if fileName}
-								<div class="flex w-full flex-row items-center justify-between gap-4 px-12">
-									<div class="flex flex-col items-center justify-center gap-2">
-										<FileUp class="text-primary size-12" />
-										<p class="text-muted-foreground">{fileName}</p>
+								{:else if fileName}
+									<div class="relative w-full h-full">
+										{#if selectedFile?.type.startsWith('image')}
+											<img
+												src={selectedFile ? URL.createObjectURL(selectedFile) : ''}
+												alt={fileName}
+												class="object-contain w-full h-full rounded-radius"
+											/>
+										{:else if selectedFile?.type.startsWith('video')}
+											<video
+												controls
+												class="object-contain w-full h-full rounded-radius"
+											>
+												<source src={selectedFile ? URL.createObjectURL(selectedFile) : ''} type={selectedFile?.type} />
+												Your browser does not support the video tag.
+											</video>
+										{/if}
+
+										<div class="absolute top-2 left-2 px-2 py-1 rounded-sm text-xs">
+											{fileName}
+										</div>
+
+										<div class="absolute top-2 right-2 px-2 py-1 rounded-sm text-xs">
+											<p>Format: {selectedFile?.type.split('/')[1].toUpperCase() || 'Unknown'}</p>
+											<p>Size: {(selectedFile?.size / 1024 / 1024).toFixed(2)} MB</p>
+											{#if selectedFile?.type.startsWith('video')}
+												<p>Resolution: 1920x1080</p>
+												<p>Length: --:--</p>
+											{/if}
+										</div>
 									</div>
-									<div class="text-muted-foreground flex flex-col gap-1 text-right text-sm">
-										<p>Resolution: 1920x1080</p>
-										<p>Format: {selectedFile?.type || 'Unknown'}</p>
-										<p>Size: {(selectedFile?.size / 1024 / 1024).toFixed(2)} MB</p>
-									</div>
-								</div>
-							{:else}
+								{:else}
 								<div class="flex flex-col items-center justify-center gap-2">
 									<FileUp class="text-primary size-12" />
 									<p class="text-muted-foreground text-center">
@@ -303,14 +322,14 @@
 							{/if}
 						</div>
 						{#each Object.entries(options) as [key, option]}
-            <OptionSelector
-              variant={option.variant}
-              name={option.name}
-              Icon={option.Icon}
-              tabs={option.tabs}
-              bind:value={ffmpegOptions[key]}
-            />
-          {/each}
+							<OptionSelector
+							variant={option.variant}
+							name={option.name}
+							Icon={option.Icon}
+							tabs={option.tabs}
+							bind:value={ffmpegOptions[key]}
+							/>
+						{/each}
 					</div>
 					<div class="flex min-h-[calc(100vh-10rem)] flex-col gap-4">
 						<TerminalInput command={ffmpegCommand} />
